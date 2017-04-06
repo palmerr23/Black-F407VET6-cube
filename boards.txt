@@ -1,0 +1,153 @@
+# See: http://code.google.com/p/arduino/wiki/Platforms
+
+menu.upload_method=Upload method
+
+################################################################################
+# NUCLEO_F429ZI board
+
+NUCLEO_F429ZI.name=Nucleo F429ZI
+
+NUCLEO_F429ZI.vid.0=0x0483
+NUCLEO_F429ZI.pid.0=0x5711
+NUCLEO_F429ZI.node=NODE_F429ZI
+
+NUCLEO_F429ZI.upload.tool=nucleoFlasher
+NUCLEO_F429ZI.upload.protocol=nucleoFlasher
+NUCLEO_F429ZI.upload.maximum_size=2097151
+NUCLEO_F429ZI.upload.maximum_data_size=262144
+
+NUCLEO_F429ZI.build.mcu=cortex-m4
+NUCLEO_F429ZI.build.f_cpu=16000000L
+NUCLEO_F429ZI.build.vid=0x0483
+NUCLEO_F429ZI.build.pid=0x5711
+NUCLEO_F429ZI.build.usb_product="NUCLEO-F429ZI"
+NUCLEO_F429ZI.build.board=NUCLEO_F429ZI
+NUCLEO_F429ZI.build.core=arduino
+NUCLEO_F429ZI.build.ldscript=linker_scripts/gcc/STM32F429ZI_FLASH.ld
+NUCLEO_F429ZI.build.variant=STM32F429ZI_Nucleo
+NUCLEO_F429ZI.build.variant_system_lib=libstm32f4_nucleo_f429zi_gcc_rel.a
+#To enable USB add '-DUSBCON'
+#To enable HID (keyboard and mouse support) add also '-DUSBD_USE_HID_COMPOSITE'
+NUCLEO_F429ZI.build.extra_flags=-mthumb -DSTM32F429xx {build.usb_flags}
+
+NUCLEO_F429ZI.menu.upload_method.MassStorageMethod=Mass Storage
+NUCLEO_F429ZI.menu.upload_method.MassStorageMethod.upload.protocol=
+NUCLEO_F429ZI.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+NUCLEO_F429ZI.menu.upload_method.STLinkMethod=STLink
+NUCLEO_F429ZI.menu.upload_method.STLinkMethod.upload.protocol=STLink
+NUCLEO_F429ZI.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
+################################################################################
+# Black F407 board V2
+
+BLACK_F407v2.name=Black F407v2
+
+BLACK_F407v2.vid.0=0x0483
+BLACK_F407v2.pid.0=0x5711
+BLACK_F407v2.node=NODE_F407VE2
+
+BLACK_F407v2.upload.tool=stlink_upload
+BLACK_F407v2.upload.protocol=STLink
+BLACK_F407v2.upload.maximum_size=524288
+## was 2097151, 512k for now
+BLACK_F407v2.upload.maximum_data_size=131072
+# was 262144, 128k for now, maybe 196608???
+
+BLACK_F407v2.build.mcu=cortex-m4
+## fix clock tree and amend this
+BLACK_F407v2.build.f_cpu=16800000L
+BLACK_F407v2.build.vid=0x0483
+BLACK_F407v2.build.pid=0x5711
+BLACK_F407v2.build.usb_product="BLACK-F407V2"
+BLACK_F407v2.build.board=BLACK_F407v2
+BLACK_F407v2.build.core=arduino
+BLACK_F407v2.build.ldscript=linker_scripts/gcc/STM32F407VE_FLASH.ld
+BLACK_F407v2.build.variant=STM32F407_Black2
+BLACK_F407v2.build.variant_system_lib=libstm32f4_BLACK_F407_gcc_rel.a
+#To enable USB add '-DUSBCON'
+#To enable HID (keyboard and mouse support) add also '-DUSBD_USE_HID_COMPOSITE'
+BLACK_F407v2.build.extra_flags=-mthumb -DSTM32F407xx -DUSBCON {build.usb_flags}
+
+BLACK_F407v2.menu.upload_method.MassStorageMethod=Mass Storage
+BLACK_F407v2.menu.upload_method.MassStorageMethod.upload.protocol=
+BLACK_F407v2.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+BLACK_F407v2.menu.upload_method.STLinkMethod=STLink
+BLACK_F407v2.menu.upload_method.STLinkMethod.upload.protocol=STLink
+BLACK_F407v2.menu.upload_method.STLinkMethod.upload.tool=stlink_upload 
+################################################################################
+# Black F407 board V1
+BLACK_F407.name=Black F407
+
+BLACK_F407.vid.0=0x0483
+BLACK_F407.pid.0=0x5711
+BLACK_F407.node=NODE_F407VE
+
+BLACK_F407.upload.tool=stlink_upload
+BLACK_F407.upload.protocol=STLink
+BLACK_F407.upload.maximum_size=524288
+## was 2097151, 512k for now
+BLACK_F407.upload.maximum_data_size=131072
+# was 262144, 128k for now, maybe 196608???
+
+BLACK_F407.build.mcu=cortex-m4
+## fix clock tree and amend this
+BLACK_F407.build.f_cpu=16800000L
+BLACK_F407.build.vid=0x0483
+BLACK_F407.build.pid=0x5711
+BLACK_F407.build.usb_product="BLACK-F407VE"
+BLACK_F407.build.board=BLACK_F407
+BLACK_F407.build.core=arduino
+BLACK_F407.build.ldscript=linker_scripts/gcc/STM32F407VE_FLASH.ld
+BLACK_F407.build.variant=STM32F407_Black
+BLACK_F407.build.variant_system_lib=libstm32f4_BLACK_F407_gcc_rel.a
+#To enable USB add '-DUSBCON'
+#To enable HID (keyboard and mouse support) add also '-DUSBD_USE_HID_COMPOSITE'
+BLACK_F407.build.extra_flags=-mthumb -DSTM32F407xx {build.usb_flags}
+
+BLACK_F407.menu.upload_method.MassStorageMethod=Mass Storage
+BLACK_F407.menu.upload_method.MassStorageMethod.upload.protocol=
+BLACK_F407.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+BLACK_F407.menu.upload_method.STLinkMethod=STLink
+BLACK_F407.menu.upload_method.STLinkMethod.upload.protocol=STLink
+BLACK_F407.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
+################################################################################
+# DISCO_F407VG board
+
+DISCO_F407VG.name=STM32F407G-DISC1
+
+DISCO_F407VG.vid.0=0x0483
+DISCO_F407VG.pid.0=0x5712B
+DISCO_F407VG.node=DIS_F407VG
+
+DISCO_F407VG.upload.tool=nucleoFlasher
+DISCO_F407VG.upload.protocol=nucleoFlasher
+DISCO_F407VG.upload.maximum_size=1048576
+DISCO_F407VG.upload.maximum_data_size=196608
+
+DISCO_F407VG.build.mcu=cortex-m4
+DISCO_F407VG.build.f_cpu=16000000L
+DISCO_F407VG.build.vid=0x0483
+DISCO_F407VG.build.pid=0x5712B
+DISCO_F407VG.build.usb_product="DISCO-F407G"
+DISCO_F407VG.build.board=DISCO_F407VG
+DISCO_F407VG.build.core=arduino
+DISCO_F407VG.build.ldscript=linker_scripts/gcc/STM32F407VGTx_FLASH.ld
+DISCO_F407VG.build.variant=STM32F407VG_Disco
+DISCO_F407VG.build.variant_system_lib=libstm32f4_disco_f407vg_gcc_rel.a
+#To enable USB add '-DUSBCON'
+#To enable HID (keyboard and mouse support) add also '-DUSBD_USE_HID_COMPOSITE'
+DISCO_F407VG.build.extra_flags=-mthumb -DSTM32F407xx {build.usb_flags}
+
+DISCO_F407VG.menu.upload_method.MassStorageMethod=Mass Storage
+DISCO_F407VG.menu.upload_method.MassStorageMethod.upload.protocol=
+DISCO_F407VG.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
+
+DISCO_F407VG.menu.upload_method.STLinkMethod=STLink
+DISCO_F407VG.menu.upload_method.STLinkMethod.upload.protocol=STLink
+DISCO_F407VG.menu.upload_method.STLinkMethod.upload.tool=stlink_upload
+
+################################################################################

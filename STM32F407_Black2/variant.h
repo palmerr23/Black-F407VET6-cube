@@ -132,19 +132,19 @@ uint32_t pinNametoPinNumber(PinName p);
 #define SPI_CHANNELS_NUM        16
 
 //default chip salect pin
-#define BOARD_SPI_DEFAULT_SS    11 // PE8 WAS 64 - jtdi conflict 
+#define BOARD_SPI_DEFAULT_SS    44 // note DAC_1 conflict 
 
 //In case SPI CS channel is not used we define a default one
 #define BOARD_SPI_OWN_SS        SPI_CHANNELS_NUM
 
-#define SPI_INTERFACES_COUNT    1
+#define SPI_INTERFACES_COUNT    3
 
 static const uint8_t SS   = BOARD_SPI_DEFAULT_SS;
-static const uint8_t SS1  = 44; //PA4 - NSS hardware
+static const uint8_t SS1  = 49; //PE9 
 static const uint8_t SS2  = 12; //PE10
-static const uint8_t MOSI = 21; //PB5
+static const uint8_t MOSI = 8;  //PA7
 static const uint8_t MISO = 45; //PA6
-static const uint8_t SCK  = 58; //PB3
+static const uint8_t SCK  = 7;  //PA5
 
 //Enable Firmata
 #define STM32 1

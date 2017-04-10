@@ -56,7 +56,7 @@ extern "C"{
 #include "PeripheralPins.h"
 
 extern const PinName digital_arduino[];
-// BLACK F407VET6 BOARD
+
 enum {
   D0,  D1,  D2,  D3,  D4,  D5,  D6,  D7,  D8,  D9,
   D10, D11, D12, D13, D14, D15, D16, D17, D18, D19,
@@ -66,16 +66,16 @@ enum {
   D50, D51, D52, D53, D54, D55, D56, D57, D58, D59,
   D60, D61, D62, D63, D64, D65, D66, D67, D68, D69,
   D70, D71, D72, D73, D74, D75, D76, D77, D78, D79,
- /* D80, D81, D82, D83, D84, */
+  D80, D81, D82, D83,
   DEND
 };
 
-#define PIN_A0   (74)
-#define PIN_A1   (75)
-#define PIN_A2   (76)
-#define PIN_A3   (77)
-#define PIN_A4   (78)
-#define PIN_A5   (79)
+#define PIN_A0   (73)
+#define PIN_A1   (74)
+#define PIN_A2   (75)
+#define PIN_A3   (76)
+#define PIN_A4   (77)
+#define PIN_A5   (78)
 
 //Analog pins
 static const uint8_t A0  = PIN_A0;
@@ -93,9 +93,9 @@ static const uint8_t A5  = PIN_A5;
 // Convert a digital pin number Dxx to a PinName Pxy
 #define digitalToPinName(p)     ((p < NUM_DIGITAL_PINS) ? digital_arduino[p] : (STM_VALID_PINNAME(p))? (PinName)p : NC)
 // Convert an analog pin number Axx to a PinName Pxy
-#define analogToPinName(p)      ((p < 6) ? digitalToPinName(p+79) : digitalToPinName(p))
+#define analogToPinName(p)      ((p < 6) ? digitalToPinName(p+73) : digitalToPinName(p))
 // Convert an analog pin number to a digital pin number
-#define analogToDigital(p)      ((p < 6) ? (p+79) : p)
+#define analogToDigital(p)      ((p < 6) ? (p+73) : p)
 // Convert a PinName Pxy to a pin number
 uint32_t pinNametoPinNumber(PinName p);
 
@@ -112,19 +112,13 @@ uint32_t pinNametoPinNumber(PinName p);
 #define PWM_MAX_DUTY_CYCLE      255
 
 //On-board LED pin number
-#define LED_D2					45
-#define LED_D3					8
-#define LED_BUILTIN             LED_D3   // "D3" LED
-#define LED_GREEN               LED_D2  // "D2" LED, ALSO RED
-#define LED_BLUE                LED_D2  
-#define LED_RED                 LED_BUILTIN 
-#define LED_ORANGE              LED_D2  
+#define LED_BUILTIN             33
+#define LED_GREEN               LED_BUILTIN
+#define LED_BLUE                79
+#define LED_RED                 80
 
 //On-board user button
-#define BTN_WK_UP 				38
-#define BTN_K0					38
-#define BTN_K1					0
-#define USER_BTN                BTN_K1 
+#define USER_BTN                81
 
 
 //SPI defintions
@@ -132,19 +126,20 @@ uint32_t pinNametoPinNumber(PinName p);
 #define SPI_CHANNELS_NUM        16
 
 //default chip salect pin
-#define BOARD_SPI_DEFAULT_SS    44 // note DAC_1 conflict 
+#define BOARD_SPI_DEFAULT_SS    10
 
 //In case SPI CS channel is not used we define a default one
 #define BOARD_SPI_OWN_SS        SPI_CHANNELS_NUM
 
-#define SPI_INTERFACES_COUNT    3
+#define SPI_INTERFACES_COUNT    1
 
 static const uint8_t SS   = BOARD_SPI_DEFAULT_SS;
-static const uint8_t SS1  = 49; //PE9 
-static const uint8_t SS2  = 12; //PE10
-static const uint8_t MOSI = 8;  //PA7
-static const uint8_t MISO = 45; //PA6
-static const uint8_t SCK  = 7;  //PA5
+static const uint8_t SS1  = 4;
+static const uint8_t SS2  = 7;
+static const uint8_t SS3  = 8;
+static const uint8_t MOSI = 11;
+static const uint8_t MISO = 12;
+static const uint8_t SCK  = 13;
 
 //Enable Firmata
 #define STM32 1
@@ -158,6 +153,8 @@ static const uint8_t SCK  = 7;  //PA5
 
 #ifdef __cplusplus
 extern UARTClass Serial;
+extern UARTClass Serial1;
+extern USARTClass Serial2;
 
 #endif
 

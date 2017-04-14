@@ -66,7 +66,7 @@ enum {
   D50, D51, D52, D53, D54, D55, D56, D57, D58, D59,
   D60, D61, D62, D63, D64, D65, D66, D67, D68, D69,
   D70, D71, D72, D73, D74, D75, D76, D77, D78, D79,
- /* D80, D81, D82, D83, D84, */
+  D80, D81, D82, D83, /* D84, */
   DEND
 };
 
@@ -76,6 +76,10 @@ enum {
 #define PIN_A3   (PA3)
 #define PIN_A4   (PB0)
 #define PIN_A5   (PB1)
+#define PIN_A6   (PC0)
+#define PIN_A7   (PC1)
+#define PIN_A8   (PC4)
+#define PIN_A9   (PC5)
 
 //Analog pins
 static const uint8_t A0  = PIN_A0;
@@ -84,6 +88,10 @@ static const uint8_t A2  = PIN_A2;
 static const uint8_t A3  = PIN_A3;
 static const uint8_t A4  = PIN_A4;
 static const uint8_t A5  = PIN_A5;
+static const uint8_t A6  = PIN_A6;
+static const uint8_t A7  = PIN_A7;
+static const uint8_t A8  = PIN_A8;
+static const uint8_t A9  = PIN_A9;
 
 #define NUM_DIGITAL_PINS        DEND
 #define NUM_ANALOG_INPUTS       (sizeof(PinMap_ADC)/sizeof(PinMap))

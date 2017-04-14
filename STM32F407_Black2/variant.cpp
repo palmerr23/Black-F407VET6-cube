@@ -106,7 +106,11 @@ const PinName digital_arduino[] = {
   PA2,  //D76/A2
   PA3,  //D77/A3
   PB0,  //D78/A4
-  PB1   //D79/A5
+  PB1,  //D79/A5
+  PC0,	//D80/A6
+  PC1,  //D81/A7
+  PC4,  //D82/A8
+  PC5   //D83/A9
 // Here we could continue to define Analog pin if we want A6,...
 // need to add J1 (TFT connector)
 };

@@ -24,83 +24,81 @@ extern "C" {
 
 // Pin number
 const PinName digital_arduino[] = {
-//J2 connector Right side - USB side, inside row
-  PE3,  //D0 - BUTTON K1 (USE INPUT_PULLUP)
-  PE5,  //D1
-  PC13, //D2
-  PC1,  //D3
-  PC3,  //D4
-  PA1,  //D5
-  PA3,  //D6
-  PA5,  //D7
-  PA7,  //D8 - BUILTIN LED D3
-  PC5,  //D9
-  PB1,  //D10
-  PE8,  //D11
-  PE10, //D12
-  PE12, //D13
-  PE14, //D14
-  PB10, //D15
-  PB12, //D16
-  PB14, //D17
-//J3 connector Left side  - SDIO side, inside row  
-  PE1,  //D18
-  PB9,  //D19
-  PB7,  //D20
-  PB5,  //D21
-  PD7,  //D22
-  PD5,  //D23
-  PD3,  //D24
-  PD1,  //D25
-  PC12, //D26
-  PC10, //D27
-  PA12, //D28
-  PA10, //D29 - RX1
-  PA8,  //D30
-  PC8,  //D31
-  PC6,  //D32
-  PD14, //D33
-  PD12, //D34
-  PD10, //D35
-  PD8,  //D36
-//J2 Connector Left Side - USB side, outside row
-  PE2,  //D37
-  PE4,  //D38 - BUTTON K0 (USE INPUT_PULLUP)
-  PE6,  //D39
-  PC0,  //D40
-  PC2,  //D41
-  PA0,  //D42 - BUTTON WK_UP (USE INPUT_PULLDOWN)
-  PA2,  //D43
-  PA4,  //D44
-  PA6,  //D45 - BUILTIN LED D2
-  PC4,  //D46
-  PB0,  //D47
-  PE7,  //D48
-  PE9,  //D49
-  PE11, //D50
-  PE13, //D51
-  PE15, //D52
-  PB11, //D53
-  PB13, //D54
-//J3 connector Right side - SDIO side, outside row
-  PE0,  //D55
-  PB8,  //D56
-  PB6,  //D57
-  PB3,  //D58
-  PD6,  //D59
-  PD4,  //D60
-  PD2,  //D61
-  PD0,  //D62
-  PC11, //D63
-  PA15, //D64
-  PA11, //D65
-  PA9,  //D66 - TX1
-  PC9,  //D67
-  PC7,  //D68
-  PD15, //D69
-  PD13, //D70
-  PD11, //D71
-  PD9,  //D72
+//J2 connector Left, Right side - USB side, 
+  PE2,  //D0
+  PE3,  //D1 - BUTTON K1 (USE INPUT_PULLUP)   
+  PE4,  //D2 - BUTTON K0 (USE INPUT_PULLUP)
+  PE5,  //D3
+  PE6,  //D4
+  PC13, //D5
+  PC0,  //D6
+  PC1,  //D7
+  PC2,  //D8 - SPI2
+  PC3,  //D9 - SPI2
+  PA0,  //D10 - BUTTON WK_UP (USE INPUT_PULLDOWN for GP button)
+  PA1,  //D11
+  PA2,  //D12
+  PA3,  //D13
+  PA4,  //D14
+  PA5,  //D15 - SPI1 (or SPI3)
+  PA6,  //D16 - BUILTIN LED D2 - SPI1 (or SPI3)
+  PA7,  //D17 - BUILTIN LED D3 - SPI1 (or SPI3)
+  PC4,  //D18
+  PC5,  //D19
+  PB0,  //D20 - Flash_CS
+  PB1,  //D21 - LCD_BL driver
+  PE7,  //D22
+  PE8,  //D23
+  PE9,  //D24 - SPI2
+  PE10, //D25 - SPI2
+  PE11, //D26 - SPI2
+  PE12, //D27
+  PE13, //D28
+  PE14, //D29
+  PE15, //D30
+  PB10, //D31 - I2C2
+  PB11, //D32 - I2C2
+  PB12, //D33 - SPI2
+  PB13, //D34 - SPI2
+  PB14, //D35 - SPI3 (or SPI1) - FLASH/NRF 
+//J3 connector Left, Right side - SDIO side
+  PE1,  //D36
+  PE0,  //D37
+  PB9,  //D38
+  PB8,  //D39 - I2C1
+  PB7,  //D40 - I2C1
+  PB6,  //D41
+  PB5,  //D42 - SPI3 (or SPI1) - FLASH/NRF
+  PB3,  //D43 - SPI3 (or SPI1) - FLASH/NRF
+  PD7,  //D44
+  PD6,  //D45 - USART2
+  PD5,  //D46 - USART2
+  PD4,  //D47
+  PD3,  //D48
+  PD2,  //D49 - SDIO
+  PD1,  //D50
+  PD0,  //D51
+  PC12, //D52 - SDIO
+  PC11, //D53 - SDIO
+  PC10, //D54 - SDIO
+  PA15, //D55
+  PA12, //D56 - USB DM
+  PA11, //D57 - USB DP
+  PA10, //D58 - RX1
+  PA9,  //D59 - TX1
+  PA8,  //D60
+  PC9,  //D61 - SDIO
+  PC8,  //D62 - SDIO
+  PC7,  //D63
+  PC6,  //D64
+  PD15, //D65
+  PD14, //D66
+  PD13, //D67
+  PD12, //D68
+  PD11, //D69
+  PD10, //D70
+  PD9,  //D71 - USART3
+  PD8,  //D72 - USART3
   PB15, //D73
 //Duplicated to have A0-A5 as F407 do not have Uno like connector
   PA0,  //D74/A0

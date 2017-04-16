@@ -69,6 +69,7 @@ const PinName digital_arduino[] = {
   PB7,  //D40 - I2C1
   PB6,  //D41
   PB5,  //D42 - SPI3 (or SPI1) - FLASH/NRF
+
   PB3,  //D43 - SPI3 (or SPI1) - FLASH/NRF
   PD7,  //D44
   PD6,  //D45 - USART2
@@ -110,7 +111,8 @@ const PinName digital_arduino[] = {
   PC0,	//D80/A6
   PC1,  //D81/A7
   PC4,  //D82/A8
-  PC5   //D83/A9
+  PC5,  //D83/A9
+  PB4,  //D84 CONNECTED TO NRF HEADER Pin 7, Winbond Flash Pin 2, NRST JTAG Pin 3
 // Here we could continue to define Analog pin if we want A6,...
 // need to add J1 (TFT connector)
 };

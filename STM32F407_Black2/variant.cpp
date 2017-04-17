@@ -69,7 +69,6 @@ const PinName digital_arduino[] = {
   PB7,  //D40 - I2C1
   PB6,  //D41
   PB5,  //D42 - SPI3 (or SPI1) - FLASH/NRF
-
   PB3,  //D43 - SPI3 (or SPI1) - FLASH/NRF
   PD7,  //D44
   PD6,  //D45 - USART2
@@ -101,18 +100,25 @@ const PinName digital_arduino[] = {
   PD9,  //D71 - USART3
   PD8,  //D72 - USART3
   PB15, //D73
-//Duplicated to have A0-A5 as F407 do not have Uno like connector
-  PA0,  //D74/A0
-  PA1,  //D75/A1
-  PA2,  //D76/A2
-  PA3,  //D77/A3
-  PB0,  //D78/A4
-  PB1,  //D79/A5
-  PC0,	//D80/A6
-  PC1,  //D81/A7
-  PC4,  //D82/A8
-  PC5,  //D83/A9
-  PB4,  //D84 CONNECTED TO NRF HEADER Pin 7, Winbond Flash Pin 2, NRST JTAG Pin 3
+  PA13, //D74 SWDIO (JTAG)
+  PA14, //D75 SWCLK (JTAG)
+  PB4,  //D76 CONNECTED TO NRF HEADER Pin 7, Winbond Flash Pin 2, NRST JTAG Pin 3
+// PortPins duplicated to have A0-A9 as F407 do not have Uno like connector
+// Update PeripheralPins.c to match
+  PA0,  //D77/A0
+  PA1,  //D78/A1
+  PA2,  //D79/A2
+  PA3,  //D80/A3
+  PB0,  //D81/A4
+  PB1,  //D82/A5
+  PC0,	//D83/A6
+  PC1,  //D84/A7
+  PC4,  //D85/A8
+  PC5,  //D86/A9
+  // AX listing could be expanded to include
+//  PC14, //D87 32.768K XTAL
+//  PC15, //D88 32.768K XTAL
+ 
 // Here we could continue to define Analog pin if we want A6,...
 // need to add J1 (TFT connector)
 };

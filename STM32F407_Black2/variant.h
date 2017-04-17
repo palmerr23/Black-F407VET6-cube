@@ -139,8 +139,10 @@ uint32_t pinNametoPinNumber(PinName p);
 //define 16 channels. As many channel as digital IOs
 #define SPI_CHANNELS_NUM        16
 
+
 //default chip seect pin
 #define BOARD_SPI_DEFAULT_SS    PE11 // PE11 ;PA4:44 hardware note DAC_1 conflict 
+
 
 //In case SPI CS channel is not used we define a default one
 #define BOARD_SPI_OWN_SS        BOARD_SPI_DEFAULT_SS
@@ -148,6 +150,7 @@ uint32_t pinNametoPinNumber(PinName p);
 #define SPI_INTERFACES_COUNT    3
 
 static const uint8_t SS   = BOARD_SPI_DEFAULT_SS;
+
 static const uint8_t SS1  = PE9; //PE9 
 static const uint8_t SS2  = PE10; //PE10
 static const uint8_t MOSI = PA7;  //PA7
@@ -161,6 +164,7 @@ static const uint8_t SCK  = PA5;  //PA5
 #define TIMER_TONE              TIM6
 #define TIMER_SERVO             TIM7
 #define TIMER_UART_EMULATED     TIM6
+
 
 //Enable Firmata
 #define STM32 1

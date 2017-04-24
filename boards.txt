@@ -69,13 +69,13 @@ BLACK_F407v2.build.variant_system_lib=libstm32f4_BLACK_F407_gcc_rel.a
 #To enable HID (keyboard and mouse support) add also '-DUSBD_USE_HID_COMPOSITE'
 BLACK_F407v2.build.extra_flags=-mthumb -DSTM32F407xx -DUSBCON {build.usb_flags}
 
-BLACK_F407v2.menu.upload_method.MassStorageMethod=Mass Storage
-BLACK_F407v2.menu.upload_method.MassStorageMethod.upload.protocol=
-BLACK_F407v2.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
-
 BLACK_F407v2.menu.upload_method.STLinkMethod=STLink
 BLACK_F407v2.menu.upload_method.STLinkMethod.upload.protocol=STLink
 BLACK_F407v2.menu.upload_method.STLinkMethod.upload.tool=stlink_upload 
+
+BLACK_F407v2.menu.upload_method.MassStorageMethod=Mass Storage
+BLACK_F407v2.menu.upload_method.MassStorageMethod.upload.protocol=
+BLACK_F407v2.menu.upload_method.MassStorageMethod.upload.tool=nucleoFlasher
 ################################################################################
 # Black F407 board V1
 BLACK_F407.name=Black F407

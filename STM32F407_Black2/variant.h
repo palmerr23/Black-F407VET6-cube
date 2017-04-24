@@ -66,7 +66,8 @@ enum {
   D50, D51, D52, D53, D54, D55, D56, D57, D58, D59,
   D60, D61, D62, D63, D64, D65, D66, D67, D68, D69,
   D70, D71, D72, D73, D74, D75, D76, D77, D78, D79,
-  D80, D81, D82, D83, /* D84, */
+  D80, D81, D82, D83, D84, D85, D86, D87, D88, D89,
+  /*  D90, D91, D92, D93, */
   DEND
 };
 
@@ -80,7 +81,8 @@ enum {
 #define PIN_A7   (PC1)
 #define PIN_A8   (PC4)
 #define PIN_A9   (PC5)
-
+#define PIN_A10  (PC2)
+#define PIN_A11  (PC3)
 //Analog pins
 static const uint8_t A0  = PIN_A0;
 static const uint8_t A1  = PIN_A1;
@@ -92,11 +94,14 @@ static const uint8_t A6  = PIN_A6;
 static const uint8_t A7  = PIN_A7;
 static const uint8_t A8  = PIN_A8;
 static const uint8_t A9  = PIN_A9;
+static const uint8_t A10 = PIN_A10;
+static const uint8_t A11 = PIN_A11;
 
 #define NUM_DIGITAL_PINS        DEND
-#define NUM_ANALOG_INPUTS       (sizeof(PinMap_ADC)/sizeof(PinMap))
+#define NUM_ANALOG_INPUTS       12 //(sizeof(PinMap_ADC)/sizeof(PinMap))
 #define MAX_DIGITAL_IOS         NUM_DIGITAL_PINS
 #define MAX_ANALOG_IOS          NUM_ANALOG_INPUTS
+#define ANALOG_BASE				(DEND - NUM_ANALOG_INPUTS)
 
 // Convert a digital pin number Dxx to a PinName Pxy
 #define digitalToPinName(p)     ((p < NUM_DIGITAL_PINS) ? digital_arduino[p] : (STM_VALID_PINNAME(p))? (PinName)p : NC)
@@ -139,10 +144,8 @@ uint32_t pinNametoPinNumber(PinName p);
 //define 16 channels. As many channel as digital IOs
 #define SPI_CHANNELS_NUM        16
 
-
 //default chip seect pin
 #define BOARD_SPI_DEFAULT_SS    PE11 // PE11 ;PA4:44 hardware note DAC_1 conflict 
-
 
 //In case SPI CS channel is not used we define a default one
 #define BOARD_SPI_OWN_SS        BOARD_SPI_DEFAULT_SS
@@ -150,11 +153,10 @@ uint32_t pinNametoPinNumber(PinName p);
 #define SPI_INTERFACES_COUNT    3
 
 static const uint8_t SS   = BOARD_SPI_DEFAULT_SS;
-
-static const uint8_t SS1  = PE9; //PE9 
+static const uint8_t SS1  = PE9;  //PE9 
 static const uint8_t SS2  = PE10; //PE10
 static const uint8_t MOSI = PA7;  //PA7
-static const uint8_t MISO = PA6; //PA6
+static const uint8_t MISO = PA6;  //PA6
 static const uint8_t SCK  = PA5;  //PA5
 #define SCLK         SCK
 
@@ -164,7 +166,6 @@ static const uint8_t SCK  = PA5;  //PA5
 #define TIMER_TONE              TIM6
 #define TIMER_SERVO             TIM7
 #define TIMER_UART_EMULATED     TIM6
-
 
 //Enable Firmata
 #define STM32 1

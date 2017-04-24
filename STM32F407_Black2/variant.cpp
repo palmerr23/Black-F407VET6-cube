@@ -103,24 +103,32 @@ const PinName digital_arduino[] = {
   PA13, //D74 SWDIO (JTAG)
   PA14, //D75 SWCLK (JTAG)
   PB4,  //D76 CONNECTED TO NRF HEADER Pin 7, Winbond Flash Pin 2, NRST JTAG Pin 3
+  PB2,  //D77 BOOT1 - J3
+//  PC14,	// XTAL
+//  PC15, // XTAL
 // PortPins duplicated to have A0-A9 as F407 do not have Uno like connector
 // Update PeripheralPins.c to match
-  PA0,  //D77/A0
-  PA1,  //D78/A1
-  PA2,  //D79/A2
-  PA3,  //D80/A3
-  PB0,  //D81/A4
-  PB1,  //D82/A5
-  PC0,	//D83/A6
-  PC1,  //D84/A7
-  PC4,  //D85/A8
-  PC5,  //D86/A9
-  // AX listing could be expanded to include
+  PA0,  //D78/A0
+  PA1,  //D79/A1
+  PA2,  //D80/A2
+  PA3,  //D81/A3
+  PB0,  //D82/A4
+  PB1,  //D83/A5
+  PC0,	//D84/A6
+  PC1,  //D85/A7
+  PC4,  //D86/A8
+  PC5,  //D87/A9
+  PC2,  //D88/A10 
+  PC3,  //D89/A11
+//  PA4,  //D82/A4
+//  PA5,  //D83/A5
+//  PA6,  //D84/A6
+//  PA7,  //D85/A7  //  PC2,  //D90/A12
+
 //  PC14, //D87 32.768K XTAL
 //  PC15, //D88 32.768K XTAL
- 
-// Here we could continue to define Analog pin if we want A6,...
-// need to add J1 (TFT connector)
+
+// need to add J1 (TFT connector)?
 };
 
 #ifdef __cplusplus
@@ -132,6 +140,7 @@ const PinName digital_arduino[] = {
  */
 
 UARTClass Serial(USART3_E);    //available on PD8/PD9
+//UARTClass Serial(USART1_E);    //available on 
 
 void serialEvent() __attribute__((weak));
 void serialEvent() { }

@@ -34,6 +34,7 @@
  *----------------------------------------------------------------------------*/
 
 #include "Arduino.h"
+#include "stm32f407xx.h"
 #ifdef __cplusplus
 #include "UARTClass.h"
 #include "USARTClass.h"
@@ -65,7 +66,8 @@ enum {
   D40, D41, D42, D43, D44, D45, D46, D47, D48, D49,
   D50, D51, D52, D53, D54, D55, D56, D57, D58, D59,
   D60, D61, D62, D63, D64, D65, D66, D67, D68, D69,
-  D70, D71, D72, D73, D74, D75, D76, D77, D78, D79,
+  D70, D71, D72, D73, D74, D75, D76, D77, 		    // ANALOG PINS FROM HERE
+  D78, D79,
   D80, D81, D82, D83, D84, D85, D86, D87, D88, D89,
   /*  D90, D91, D92, D93, */
   DEND
@@ -83,7 +85,15 @@ enum {
 #define PIN_A9   (PC5)
 #define PIN_A10  (PC2)
 #define PIN_A11  (PC3)
+
 //Analog pins
+
+enum {
+  A_START_AFTER = D77,
+  A0,  A1,  A2,  A3,  A4,  A5, A6, A7, A8, A9, A10, A11,
+  AEND
+};
+/*
 static const uint8_t A0  = PIN_A0;
 static const uint8_t A1  = PIN_A1;
 static const uint8_t A2  = PIN_A2;
@@ -96,19 +106,23 @@ static const uint8_t A8  = PIN_A8;
 static const uint8_t A9  = PIN_A9;
 static const uint8_t A10 = PIN_A10;
 static const uint8_t A11 = PIN_A11;
+*/
 
-#define NUM_DIGITAL_PINS        DEND
-#define NUM_ANALOG_INPUTS       12 //(sizeof(PinMap_ADC)/sizeof(PinMap))
-#define MAX_DIGITAL_IOS         NUM_DIGITAL_PINS
-#define MAX_ANALOG_IOS          NUM_ANALOG_INPUTS
-#define ANALOG_BASE				(DEND - NUM_ANALOG_INPUTS)
+#define MAX_ANALOG_IOS        (sizeof(PinMap_ADC)/sizeof(PinMap))
+#define MAX_DIGITAL_IOS       DEND
+#define NUM_DIGITAL_PINS      MAX_DIGITAL_IOS
+#define NUM_ANALOG_INPUTS     (AEND - A0)
+#define ANALOG_BASE			  (DEND - NUM_ANALOG_INPUTS)
 
 // Convert a digital pin number Dxx to a PinName Pxy
 #define digitalToPinName(p)     ((p < NUM_DIGITAL_PINS) ? digital_arduino[p] : (STM_VALID_PINNAME(p))? (PinName)p : NC)
+
 // Convert an analog pin number Axx to a PinName Pxy
-#define analogToPinName(p)      ((p < 6) ? digitalToPinName(p+79) : digitalToPinName(p))
+#define analogToPinName(p)      ((p < NUM_ANALOG_INPUTS) ? digitalToPinName(p+ANALOG_BASE) : digitalToPinName(p))
+
 // Convert an analog pin number to a digital pin number
-#define analogToDigital(p)      ((p < 6) ? (p+79) : p)
+#define analogToDigital(p)      ((p < NUM_ANALOG_INPUTS) ? (p+ANALOG_BASE) : p)
+
 // Convert a PinName Pxy to a pin number
 uint32_t pinNametoPinNumber(PinName p);
 

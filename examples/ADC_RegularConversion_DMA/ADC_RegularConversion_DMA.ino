@@ -1,4 +1,7 @@
 /**
+ * 12 bits DMA, single ADC
+ * DMA is stopped after one buffer, to allow the buffer to be processed, unchanged.
+ * DMA can be left running - see instructions in loop()and HAL_ADC_ConvCpltCallback(). 
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_DMA/Src/main.c 
   * @author  MCD Application Team
@@ -57,9 +60,9 @@
 ADC_HandleTypeDef    AdcHandle;
 
 /* Variable used to get converted value */
-__IO uint16_t uhADCxConvertedValue = 0; // single value for non DMA use
-#define NSAMPLES 32
-__IO uint32_t convBuffer[NSAMPLES]; // DMA transfers at 32 bit boundaries. 
+#define NSAMPLES 1024
+__IO uint32_t convBuffer[NSAMPLES];   // DMA transfers in 32 bit chunks. 
+#define NPRINT 128                    // just display the first NPRINT samples
 
 /* Private function prototypes -----------------------------------------------*/
 
@@ -83,11 +86,11 @@ void setup(void)
        - Global MSP (MCU Support Package) initialization
      */
   HAL_Init();
-
     
   SERIALX.begin(9600);
   delay(200);
-  SERIALX.println("ADC Demo - Regular Conversion, ADC3, PA1, DMA");
+  SERIALX.println("\n");
+  SERIALX.println("ADC Demo - Regular Conversion DMA: ADC3 on PA1");
   
   /* Configure LED1 and LED2 */
   BSP_LED_Init(LED1);
@@ -120,7 +123,7 @@ void setup(void)
   /*##-2- Configure ADC regular channel ######################################*/  
   sConfig.Channel = ADCx_CHANNEL;
   sConfig.Rank = 1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_15CYCLES;
+  sConfig.SamplingTime = ADC_SAMPLETIME_3CYCLES;
   sConfig.Offset = 0;
   
   if(HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) != HAL_OK)
@@ -131,6 +134,9 @@ void setup(void)
 }
 
 int i;
+volatile uint32_t started, finished;
+int32_t elapsed;
+float tsamp;
 void loop(void)
 { 
 
@@ -139,22 +145,36 @@ void loop(void)
   /*       (IT by DMA end of transfer), select sampling time and ADC clock    */
   /*       with sufficient duration to not create an overhead situation in    */
   /*       IRQHandler. */ 
-  //SERIALX.println("Starting");
-  if(HAL_ADC_Start_DMA(&AdcHandle, (uint32_t*)convBuffer, NSAMPLES) != HAL_OK) //&uhADCxConvertedValue,1
+
+  started = micros();
+
+ // move  HAL_ADC_Start_DMA() to setup, for continuous conversions
+  if(HAL_ADC_Start_DMA(&AdcHandle, (uint32_t*)convBuffer, NSAMPLES) != HAL_OK) 
   {
     /* Start Conversation Error */
     Error_Handler(); 
   }   
-   delay(10); // wait for the ADC/DMA do their work - more than a single (circular) buffer may be transferred
+   delay(300); // wait for the ADC/DMA do their work - more than a single (circular) buffer may be transferred
    
-   // DMA can be left running. Stopping it leaves the buffer unchanged while it's being printed.
-   HAL_ADC_Stop_DMA(&AdcHandle);
    
    BSP_LED_Off(LED1); // turn off indicator that DMA is completed
   // SERIALX.println("Stopped");
-    
-   SERIALX.print("Values = ");
-   for(i=0; i<NSAMPLES; i++){
+   
+    /*SERIALX.print("Started ");
+    SERIALX.print(started);
+    SERIALX.print(", finished ");
+    SERIALX.println(finished);
+    */
+    elapsed = finished - started;
+    SERIALX.print("Capture took ");
+    SERIALX.print(elapsed);
+    SERIALX.print(" uS, time per sample = ");
+    tsamp = (float)elapsed/NSAMPLES;
+    SERIALX.print(tsamp);
+    SERIALX.print(", sample frequency ");
+    SERIALX.print(1/tsamp);
+    SERIALX.print(" MHz\nValues:\n");
+   for(i=0; i < min(NPRINT, NSAMPLES); i++){
      SERIALX.print(convBuffer[i]);
      SERIALX.print(", ");
      if(i % 8 == 7) SERIALX.println("");
@@ -190,8 +210,13 @@ static void Error_Handler(void)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
 {
+  finished = micros();
+ 
   /* Turn LED1 on: Transfer process is correct */
   BSP_LED_On(LED1);
+  
+  // stop the DMA. 
+  HAL_ADC_Stop_DMA(AdcHandle); // comment this line for continuous conversion
 }
 
 #ifdef  USE_FULL_ASSERT

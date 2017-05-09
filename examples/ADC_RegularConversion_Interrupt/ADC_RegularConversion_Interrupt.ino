@@ -1,6 +1,7 @@
 /**
  * Works cube2, interrupt, continuous conversion.
- * keep sample >= 56 or interrupt processing takes all CPU cycles.
+ * keep sample time >= 56 or interrupt processing takes all CPU cycles.
+ * Convert time ~3.5 uS. could be much faster in one-shot mode, with shorter sample time.
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Interrupt/Src/main.c 
   * @author  MCD Application Team
@@ -45,16 +46,13 @@ static void Error_Handler(void);
   * @param  None
   * @retval None
   */
-
-char strg[] = "Google";
-
 void setup()
 {
   HAL_Init();
   
   SERIALX.begin(9600);
   delay(200);
-  SERIALX.println("ADC Demo - Regular Conversion, ADC1, PA1, Interrupts");
+  SERIALX.println("ADC Demo - Single Channel Regular Conversion, Interrupts: ADC1 on PA1");
   
   BSP_LED_Init(LED1);
   BSP_LED_Init(LED3);
@@ -87,7 +85,7 @@ void setup()
   sConfig.Channel = ADCx_CHANNEL;
   sConfig.Rank = 1;
   /************ NO SHORTER THAN 56 CYCLES OR ALL PROCESSING TIME IS USED BY INTERRUPT ROUTINE ***************/
-  sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES; 
+  sConfig.SamplingTime = ADC_SAMPLETIME_56CYCLES; // SEE ABOVE!!!!
   sConfig.Offset = 0;
   
   if(HAL_ADC_ConfigChannel(&AdcHandle, &sConfig) != HAL_OK)
@@ -97,27 +95,29 @@ void setup()
   }
 
   BSP_LED_Off(LED1);
-  SERIALX.println("Starting conversion");
+  SERIALX.println("Starting conversions");
    
   /*##-3- Start the conversion process and enable interrupt ##################*/  
   if(HAL_ADC_Start_IT(&AdcHandle) != HAL_OK)
   {
     /***** HAL_ADC_Start_IT() always returns HAL_OK ******/
     Error_Handler();
-  }
-   SERIALX.println("Started");
+  }  
 }
+
 int loops = 0;
+volatile uint32_t lastone, thisone; // timing variables
+volatile int elapsed;
 void loop()
 {
-  
-  HAL_ADC_ConvCpltCallback(&AdcHandle); // already done by interrupt routine???
-  
+
   SERIALX.print(loops++);
-  SERIALX.print(" ADC value = ");
+  SERIALX.print(", Conv time ");
+  SERIALX.print(elapsed);
+  SERIALX.print(" us, Value = ");
   SERIALX.println(uhADCxConvertedValue);
   
-  delay(100);
+  delay(200);
 }
 
 
@@ -149,7 +149,14 @@ static void Error_Handler(void)
   */
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef* AdcHandle)
 {
-  /* Get the converted value of regular channel */
+  /* time between interrupts
+   *  
+   */
+  thisone = micros();
+  elapsed = thisone - lastone;
+  lastone = thisone;  
+  
+  /* Get the converted value of regular channel */ 
   uhADCxConvertedValue = HAL_ADC_GetValue(AdcHandle);
 }
 

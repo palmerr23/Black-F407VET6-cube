@@ -1,6 +1,6 @@
 /**
  * 
- * regular, singler conv, pollomg, works with cube2
+ * regular, single conv, polling, works with cube
  * 
   ******************************************************************************
   * @file    ADC/ADC_RegularConversion_Polling/Src/main.c 
@@ -89,10 +89,6 @@ void setup()
        - Global MSP (MCU Support Package) initialization
      */
 
-  
-  /* Configure the system clock to 144 MHz */
- // SystemClock_Config();
-  
   /* Configure LED3 */
   BSP_LED_Init(LED3);
   
@@ -112,7 +108,6 @@ void setup()
   AdcHandle.Init.ExternalTrigConv      = ADC_EXTERNALTRIGCONV_T1_CC1;
   AdcHandle.Init.DMAContinuousRequests = DISABLE;
 
-    //  set_g_pin(ADC_PIN); // kludge, see analog.c 
   if(HAL_ADC_Init(&AdcHandle) != HAL_OK)
   {
     /* Initialization Error */

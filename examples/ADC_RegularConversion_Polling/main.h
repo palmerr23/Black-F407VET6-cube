@@ -64,7 +64,10 @@
 #define ADCx_CHANNEL                    ADC_CHANNEL_1
 
 /* Exported macro ------------------------------------------------------------*/
-
+#define LED3                          PA7
+#define BSP_LED_Init(X)               pinMode(X, OUTPUT)
+#define BSP_LED_On(X)                 digitalWrite(X, LOW)  
+#define BSP_LED_Off(X)                digitalWrite(X, HIGH)  
 
 /* Exported functions ------------------------------------------------------- */
 
